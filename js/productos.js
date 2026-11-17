@@ -12,8 +12,8 @@ export const PLANILLA_CONFIG = 'https://docs.google.com/spreadsheets/d/e/2PACX-1
 
 // PLANILLA_TALLES y PLANILLA_PREGUNTAS: links de las pestañas "Talles" y "Preguntas" publicadas como CSV (opcionales).
 // Mientras estén vacíos se usan los ejemplos de data/.
-export const PLANILLA_TALLES = '';
-export const PLANILLA_PREGUNTAS = '';
+export const PLANILLA_TALLES = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQzLOcUbBUEBv97PWVXJB_Ic7rVe4DNkwJrErivueO27XMZqwOiHSPlWNAbQeh1RkVeieWb2v_1tAXi/pub?gid=1697063948&single=true&output=csv';
+export const PLANILLA_PREGUNTAS = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQzLOcUbBUEBv97PWVXJB_Ic7rVe4DNkwJrErivueO27XMZqwOiHSPlWNAbQeh1RkVeieWb2v_1tAXi/pub?gid=747368476&single=true&output=csv';
 export const RESPALDO_TALLES = 'data/talles-ejemplo.csv';
 export const RESPALDO_PREGUNTAS = 'data/preguntas-ejemplo.csv';
 
