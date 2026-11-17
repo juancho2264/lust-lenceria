@@ -1,0 +1,11 @@
+Código,Nombre,Categoría,Precio,Talles,Colores,Foto,Etiqueta,Agotado,Mostrar
+LU-01,Conjunto Encaje Noir,Conjuntos,18500,"S, M, L","Negro, Bordó",,Más vendido,no,sí
+LU-02,Bikini Vichy,Bikinis,10000,"S, M, L","Rosa, Celeste",,Nuevo,no,sí
+LU-03,Conjunto Rayas,Conjuntos,16000,"S, M, L, XL",Azul marino,,,no,sí
+LU-04,Body Encaje Rosé,Bodys,21000,"S, M, L","Rosa, Negro",,Nuevo,no,sí
+LU-05,Corpiño Flores,Corpiños,12500,"85, 90, 95, 100","Celeste, Blanco",,,no,sí
+LU-06,Bikini Triángulo,Bikinis,11000,"S, M, L","Negro, Rojo",,,no,sí
+LU-07,Bombacha Floreada,Bombachas,4500,"S, M, L, XL","Lila, Rosa",,Básico,no,sí
+LU-08,Conjunto Tul Lila,Conjuntos,17500,"S, M, L",Lila,,,sí,sí
+LU-09,Corpiño Push Up,Corpiños,14000,"85, 90, 95","Negro, Nude",,,no,sí
+LU-10,Pack x3 Bombachas Algodón,Bombachas,11000,"S, M, L, XL",Surtido,,Ahorrá,no,sí

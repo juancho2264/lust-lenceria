@@ -1,4 +1,8 @@
-import { CATEGORIAS, ENVIO, PRODUCTOS } from './productos.js';
+import { ENVIO, PLANILLA, RESPALDO } from './productos.js';
+import { categoriasDe, productosDesdeCSV } from './planilla.js';
+
+let PRODUCTOS = [];
+let CATEGORIAS = ['Todo'];
 
 const CONFIG = {
   // Número de WhatsApp de Mica con código de país, sin + ni espacios. Ej.: '5491123456789'
@@ -24,7 +28,6 @@ let bolsa = [];
 try { bolsa = JSON.parse(localStorage.getItem('lust-bolsa')) || []; } catch { bolsa = []; }
 const guardar = () => { try { localStorage.setItem('lust-bolsa', JSON.stringify(bolsa)); } catch { /* sin almacenamiento */ } };
 const producto = (id) => PRODUCTOS.find((p) => p.id === id);
-bolsa = bolsa.filter((i) => producto(i.id)); // por si se borró un producto del catálogo
 
 // ---------- Catálogo ----------
 let categoria = 'Todo';
@@ -57,7 +60,7 @@ function tarjeta(p, i) {
   if (p.agotado) foto.append(el('span', 'producto__agotado', 'Sin stock'));
 
   const info = el('div', 'producto__info');
-  info.append(el('h3', null, p.nombre), el('p', 'producto__precio', pesos(p.precio)));
+  info.append(el('span', 'producto__codigo', p.codigo), el('h3', null, p.nombre), el('p', 'producto__precio', pesos(p.precio)));
 
   // Colores
   const colores = el('div', 'opciones opciones--color');
@@ -177,7 +180,7 @@ function dibujarBolsa() {
 function mensajePedido() {
   const lineas = bolsa.map((i) => {
     const p = producto(i.id);
-    return `• ${i.cantidad} x ${p.nombre} — Talle ${i.talle}, ${i.color} — ${pesos(p.precio * i.cantidad)}`;
+    return `• ${i.cantidad} x ${p.nombre} [${p.codigo}] — Talle ${i.talle}, ${i.color} — ${pesos(p.precio * i.cantidad)}`;
   });
   const entrega = conEnvio()
     ? `Envío a ${form.localidad.value.trim()} (${pesos(ENVIO)})`
@@ -240,7 +243,38 @@ document.querySelectorAll('[data-whatsapp]').forEach((b) => {
   b.rel = 'noopener';
 });
 
+// ---------- Arranque: leer el catálogo de la planilla ----------
+async function leer(url) {
+  const r = await fetch(url, { cache: 'no-store' });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return productosDesdeCSV(await r.text());
+}
+
+async function cargarCatalogo() {
+  let datos;
+  try {
+    if (!PLANILLA) throw new Error('sin planilla');
+    datos = await leer(PLANILLA);
+    if (!datos.productos.length) throw new Error('planilla sin productos');
+  } catch (error) {
+    if (PLANILLA) console.warn('No se pudo leer la planilla, uso el respaldo:', error.message);
+    datos = await leer(RESPALDO);
+  }
+  // Los avisos ayudan a Mica a encontrar una fila mal cargada (se ven en la consola del navegador)
+  datos.avisos.forEach((a) => console.warn('Planilla:', a));
+  PRODUCTOS = datos.productos;
+  CATEGORIAS = categoriasDe(PRODUCTOS);
+  bolsa = bolsa.filter((i) => producto(i.id)); // por si se sacó un producto del catálogo
+  guardar();
+}
+
 document.getElementById('precio-envio').textContent = pesos(ENVIO);
-dibujarFiltros();
-dibujarProductos();
-dibujarBolsa();
+cargarCatalogo()
+  .catch(() => {
+    document.getElementById('productos').replaceChildren(el('p', 'catalogo__error', 'No pudimos cargar el catálogo. Escribinos por WhatsApp y te lo pasamos.'));
+  })
+  .finally(() => {
+    document.getElementById('productos').classList.remove('cargando');
+    if (PRODUCTOS.length) { dibujarFiltros(); dibujarProductos(); }
+    dibujarBolsa();
+  });

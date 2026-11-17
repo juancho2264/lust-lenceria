@@ -199,3 +199,9 @@ a { color: inherit; }
   .pasos li { padding: 20px 14px; }
 }
 @media (max-width: 860px) { .boton--chico { padding: 11px 8px; font-size: .82rem; } }
+
+/* Código de producto, carga y errores del catálogo */
+.producto__codigo { display: block; font-size: .72rem; letter-spacing: 1px; color: var(--suave); text-transform: uppercase; }
+.esqueleto { aspect-ratio: 4 / 6; border-radius: 18px; background: linear-gradient(90deg, var(--rosa-claro), #fff, var(--rosa-claro)); background-size: 200% 100%; animation: brillo 1.2s infinite linear; }
+@keyframes brillo { to { background-position: -200% 0; } }
+.catalogo__error { grid-column: 1 / -1; text-align: center; color: var(--suave); }
