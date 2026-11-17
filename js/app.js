@@ -167,7 +167,7 @@ $('galeria-siguiente').addEventListener('click', () => irAFoto(fotoActual + 1));
 function abrirFicha(p) {
   actual = p;
   elegido = { talle: '', color: Object.keys(p.colores)[0] };
-  $('ficha-meta').textContent = `${p.categoria} · Cód. ${p.codigo}`;
+  $('ficha-meta').textContent = p.categoria;
   $('ficha-nombre').textContent = p.nombre;
   $('ficha-precios').replaceChildren(precios(p, true));
   $('ficha-descripcion').textContent = p.descripcion;
@@ -333,7 +333,7 @@ function dibujarBolsa() {
     const muestra = imagen(p, 0, p.colores[item.color]);
     muestra.classList.add('item__muestra');
     const texto = el('div', 'item__texto');
-    texto.append(el('strong', null, p.nombre), el('span', null, `Talle ${item.talle} · ${item.color} · Cód. ${p.codigo}`), el('span', 'item__precio', pesos(p.precio * item.cantidad)));
+    texto.append(el('strong', null, p.nombre), el('span', null, `Talle ${item.talle} · ${item.color}`), el('span', 'item__precio', pesos(p.precio * item.cantidad)));
     const ctrl = el('div', 'item__cantidad');
     const menos = el('button', null, '−'); menos.type = 'button'; menos.setAttribute('aria-label', 'Quitar uno');
     const mas = el('button', null, '+'); mas.type = 'button'; mas.setAttribute('aria-label', 'Sumar uno');

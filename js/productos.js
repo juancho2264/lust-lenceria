@@ -16,6 +16,6 @@ export const CONFIG_INICIAL = {
   instagram: 'https://www.instagram.com/lust_lenceria2/',
   envio: 6000,
   envioGratisDesde: 0, // 0 = sin envío gratis
-  descuentoTransferencia: 10, // % de descuento pagando por transferencia (0 = sin descuento)
+  descuentoTransferencia: 0, // % de descuento pagando por transferencia (0 = sin descuento)
   avisos: ['Envíos a todo el país', 'Retiro gratis en Merlo', 'Bikinis desde $10.000', 'Nuevos ingresos todas las semanas'],
 };
