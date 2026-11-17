@@ -45,11 +45,13 @@ Cada fila es un producto.
 **Una sola vez:** creá en Google Drive una carpeta **"Fotos Lust"** → tocá **⋯** → **Compartir** → **Acceso general: "Cualquier usuario con el vínculo" → Lector**. Si la carpeta queda en "Restringido", las fotos no se ven en la página.
 
 **Para cada foto:**
+
 1. Abrí **Google Drive** → carpeta **"Fotos Lust"** → **+** → **Subir** → **Fotos y videos**.
 2. En la foto subida: **⋯** → **Compartir** → **Copiar vínculo**.
 3. Pegalo en la columna **Fotos** del producto. Para varias fotos, separalas con coma.
 
 **Tips:**
+
 - En el iPhone: **Ajustes → Cámara → Formatos → "Más compatible"** (así saca fotos en JPG, que funcionan en todos lados).
 - Mismo fondo y **en vertical**. Ideal: frente, espalda, detalle de la tela y puesta.
 - Los links de **Google Fotos o iCloud no sirven**: tienen que ser de Google Drive.
