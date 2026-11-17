@@ -56,3 +56,42 @@ test('códigos repetidos no se pisan y las categorías salen en orden', () => {
   assert.notEqual(productos[0].id, productos[1].id);
   assert.deepEqual(categoriasDe(productos), ['Todo', 'Bikinis', 'Bodys']);
 });
+
+test('varias fotos, descripción, talles agotados y precio anterior', () => {
+  const csv = 'Nombre,Precio,Precio anterior,Talles,Talles agotados,Fotos,Descripción\n'
+    + 'Body,14900,18500,"S, M, L",M,"https://a.com/1.jpg https://a.com/2.jpg",Tela suave\n'
+    + 'Bikini,10000,9000,"S, M","S, M",,';
+  const { productos: [body, bikini] } = productosDesdeCSV(csv);
+  assert.deepEqual(body.fotos, ['https://a.com/1.jpg', 'https://a.com/2.jpg']);
+  assert.deepEqual(body.tallesAgotados, ['M']);
+  assert.equal(body.precioAnterior, 18500);
+  assert.equal(body.descripcion, 'Tela suave');
+  assert.equal(bikini.precioAnterior, null, 'un precio anterior más bajo no es oferta');
+  assert.equal(bikini.agotado, true, 'sin talles disponibles queda agotado');
+});
+
+test('ordena etiquetados primero y agotados al final; busca sin tildes', async () => {
+  const { ordenar, buscar } = await import('./planilla.js');
+  const lista = [
+    { nombre: 'A', etiqueta: '', agotado: false }, { nombre: 'B', etiqueta: '', agotado: true },
+    { nombre: 'C', etiqueta: 'Nuevo', agotado: false },
+  ];
+  assert.deepEqual(ordenar(lista).map((p) => p.nombre), ['C', 'A', 'B']);
+  const { productos } = productosDesdeCSV('Nombre,Precio,Talles,Colores\nCorpiño Flores,1,S,Celeste\nBody,1,S,Negro');
+  assert.equal(buscar(productos, 'corpino celeste').length, 1);
+  assert.equal(buscar(productos, '').length, 2);
+});
+
+test('la configuración solo acepta valores válidos', async () => {
+  const { configDesdeCSV } = await import('./planilla.js');
+  const base = { whatsapp: '', envio: 6000, envioGratisDesde: 0, descuentoTransferencia: 0, avisos: ['x'] };
+  const c = configDesdeCSV('Clave,Valor\nWhatsApp,+54 9 11 2345-6789\nEnvío,$7.000\nEnvío gratis desde,50000\nDescuento transferencia,10%\nAvisos,Uno | Dos', base);
+  assert.equal(c.whatsapp, '5491123456789');
+  assert.equal(c.envio, 7000);
+  assert.equal(c.envioGratisDesde, 50000);
+  assert.equal(c.descuentoTransferencia, 10);
+  assert.deepEqual(c.avisos, ['Uno', 'Dos']);
+  const mala = configDesdeCSV('WhatsApp,llamame\nDescuento transferencia,90', base);
+  assert.equal(mala.whatsapp, '');
+  assert.equal(mala.descuentoTransferencia, 0);
+});

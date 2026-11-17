@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#fbe9ee">
   <title>Lust Lencería · Merlo</title>
-  <meta name="description" content="Lencería y bikinis. Elegí, armá tu pedido y te lo mandamos a todo el país. Merlo, Buenos Aires.">
-  <meta name="robots" content="noindex">
+  <meta name="description" content="Lencería, bikinis y básicos. Elegí, armá tu pedido y te lo mandamos a todo el país. Merlo, Buenos Aires.">
+  <meta property="og:title" content="Lust Lencería · Catálogo">
+  <meta property="og:description" content="Lencería y bikinis. Elegí talle y color, armá tu bolsa y pedí por WhatsApp. Envíos a todo el país.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%238c2f4b'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23fbe9ee'%3EL%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -15,10 +20,7 @@
 </head>
 <body>
   <div class="anuncio" aria-label="Avisos">
-    <div class="anuncio__pista">
-      <span>Envíos a todo el país</span><span>Retiro gratis en Merlo</span><span>Bikinis desde $10.000</span><span>Nuevos ingresos todas las semanas</span>
-      <span>Envíos a todo el país</span><span>Retiro gratis en Merlo</span><span>Bikinis desde $10.000</span><span>Nuevos ingresos todas las semanas</span>
-    </div>
+    <div class="anuncio__pista" id="avisos"></div>
   </div>
 
   <header class="cabecera">
@@ -52,12 +54,25 @@
       </div>
     </section>
 
+    <!-- Confianza -->
+    <ul class="confianza" aria-label="Por qué comprar acá">
+      <li><span aria-hidden="true">💬</span><strong>Atención personal</strong>Te respondo yo por WhatsApp</li>
+      <li><span aria-hidden="true">📏</span><strong>Te ayudo con el talle</strong>Antes de que compres</li>
+      <li><span aria-hidden="true">🔒</span><strong>Pagás al confirmar</strong>Primero te confirmo el stock</li>
+      <li><span aria-hidden="true">📦</span><strong>Envíos a todo el país</strong>O retirás gratis en Merlo</li>
+    </ul>
+
     <!-- CATÁLOGO -->
     <section class="seccion" id="catalogo">
       <div class="seccion__titulo">
         <p class="manuscrita">elegí tu favorita</p>
         <h2>Catálogo</h2>
       </div>
+      <label class="buscador">
+        <span class="sr">Buscar en el catálogo</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m21 21-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"/></svg>
+        <input type="search" id="buscar" placeholder="Buscar: body, negro, encaje…" autocomplete="off">
+      </label>
       <div class="filtros" role="tablist" aria-label="Categorías" id="filtros"></div>
       <div class="productos cargando" id="productos" aria-busy="true"><div class="esqueleto"></div><div class="esqueleto"></div><div class="esqueleto"></div><div class="esqueleto"></div></div>
     </section>
@@ -69,11 +84,19 @@
         <h2>Cómo comprar</h2>
       </div>
       <ol class="pasos">
-        <li><span class="pasos__num">1</span><h3>Elegí</h3><p>Tocá el talle y el color, y sumalo a tu bolsa.</p></li>
+        <li><span class="pasos__num">1</span><h3>Elegí</h3><p>Tocá un producto, elegí talle y color y sumalo a tu bolsa.</p></li>
         <li><span class="pasos__num">2</span><h3>Enviá</h3><p>Tocá "Pedir por WhatsApp": el pedido se escribe solo.</p></li>
-        <li><span class="pasos__num">3</span><h3>Pagá</h3><p>Te confirmo stock y te paso los datos para transferir.</p></li>
+        <li><span class="pasos__num">3</span><h3>Pagá</h3><p>Te confirmo stock y recién ahí pagás.</p></li>
         <li><span class="pasos__num">4</span><h3>Recibí</h3><p>Retirás en Merlo o te lo mando a todo el país.</p></li>
       </ol>
+      <div class="pagos">
+        <h3>Medios de pago</h3>
+        <ul>
+          <li>🏦 Transferencia <b id="pagos-descuento"></b></li>
+          <li>💵 Efectivo al retirar</li>
+          <li>💳 Mercado Pago (te mando el link)</li>
+        </ul>
+      </div>
     </section>
 
     <!-- TALLES -->
@@ -112,6 +135,56 @@
     <p>Merlo, Buenos Aires · Envíos a todo el país</p>
   </footer>
 
+  <!-- FICHA DE PRODUCTO -->
+  <dialog class="ficha" id="ficha" aria-labelledby="ficha-nombre">
+    <button type="button" class="cerrar cerrar--ficha" data-cerrar-ficha aria-label="Cerrar">×</button>
+    <div class="ficha__grilla">
+      <div class="galeria">
+        <div class="galeria__pista" id="galeria-pista"></div>
+        <button type="button" class="galeria__flecha galeria__flecha--izq" id="galeria-anterior" aria-label="Foto anterior">‹</button>
+        <button type="button" class="galeria__flecha galeria__flecha--der" id="galeria-siguiente" aria-label="Foto siguiente">›</button>
+        <div class="galeria__puntos" id="galeria-puntos"></div>
+        <span class="galeria__lupa" aria-hidden="true">🔍 Tocá para ampliar</span>
+      </div>
+      <div class="ficha__info">
+        <p class="ficha__meta" id="ficha-meta"></p>
+        <h2 id="ficha-nombre"></h2>
+        <div class="precios" id="ficha-precios"></div>
+        <p class="ficha__descripcion" id="ficha-descripcion"></p>
+
+        <div class="ficha__opcion">
+          <p class="ficha__etiqueta">Color: <b id="ficha-color"></b></p>
+          <div class="opciones opciones--color" id="ficha-colores"></div>
+        </div>
+        <div class="ficha__opcion">
+          <p class="ficha__etiqueta">Talle <a href="#talles" data-cerrar-ficha>Ver guía de talles</a></p>
+          <div class="opciones" id="ficha-talles"></div>
+        </div>
+        <p class="ficha__error" id="ficha-error" role="alert"></p>
+
+        <button type="button" class="boton boton--ancho" id="ficha-agregar">Agregar a la bolsa</button>
+        <div class="ficha__secundarias">
+          <a class="boton boton--borde" id="ficha-consultar">Consultar por este producto</a>
+          <button type="button" class="boton boton--borde" id="ficha-compartir">Compartir</button>
+        </div>
+
+        <ul class="ficha__confianza">
+          <li>🔒 No pagás nada acá: primero te confirmo el stock.</li>
+          <li>📏 ¿Dudás con el talle? Escribime y te ayudo.</li>
+          <li>📦 Envío a todo el país o retiro gratis en Merlo.</li>
+          <li>ℹ️ Por higiene, la ropa interior no tiene cambio.</li>
+        </ul>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ZOOM -->
+  <dialog class="zoom" id="zoom" aria-label="Foto ampliada">
+    <button type="button" class="cerrar cerrar--zoom" id="cerrar-zoom" aria-label="Cerrar">×</button>
+    <div class="zoom__marco" id="zoom-marco"><img id="zoom-imagen" alt=""></div>
+    <p class="zoom__ayuda">Tocá la foto para acercar o alejar</p>
+  </dialog>
+
   <!-- BOLSA -->
   <div class="fondo-bolsa" id="fondo-bolsa" hidden></div>
   <aside class="bolsa" id="bolsa" aria-label="Mi bolsa" aria-hidden="true">
@@ -123,15 +196,23 @@
       <ul class="bolsa__lista" id="lista-bolsa"></ul>
       <p class="bolsa__vacia" id="bolsa-vacia">Tu bolsa está vacía.<br><a href="#catalogo" data-cerrar-bolsa>Ver catálogo</a></p>
       <form class="bolsa__form" id="form-pedido" novalidate>
+        <p class="envio-gratis" id="envio-gratis" hidden></p>
         <fieldset class="entrega">
           <legend>¿Cómo lo recibís?</legend>
           <label><input type="radio" name="entrega" value="retiro" checked><span>Retiro en Merlo <b>Gratis</b></span></label>
           <label><input type="radio" name="entrega" value="envio"><span>Envío a domicilio <b id="precio-envio"></b></span></label>
         </fieldset>
-        <label>Tu nombre<input name="nombre" autocomplete="given-name" required></label>
-        <label id="campo-localidad" hidden>Localidad<input name="localidad" autocomplete="address-level2"></label>
+        <fieldset class="entrega">
+          <legend>¿Cómo pagás?</legend>
+          <label><input type="radio" name="pago" value="Transferencia" checked><span>Transferencia <b id="etiqueta-descuento"></b></span></label>
+          <label id="opcion-efectivo"><input type="radio" name="pago" value="Efectivo al retirar"><span>Efectivo al retirar</span></label>
+          <label><input type="radio" name="pago" value="Mercado Pago"><span>Mercado Pago</span></label>
+        </fieldset>
+        <label>Tu nombre<input name="nombre" autocomplete="given-name" maxlength="60" required></label>
+        <label id="campo-localidad" hidden>Localidad<input name="localidad" autocomplete="address-level2" maxlength="80"></label>
         <div class="bolsa__totales">
           <p><span>Productos</span><span id="subtotal">$0</span></p>
+          <p id="fila-descuento" hidden><span>Descuento transferencia</span><span id="descuento"></span></p>
           <p id="fila-envio" hidden><span>Envío</span><span id="costo-envio"></span></p>
           <p class="bolsa__total"><span>Total</span><span id="total">$0</span></p>
         </div>
@@ -140,7 +221,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>
           Pedir por WhatsApp
         </button>
-        <p class="bolsa__nota">No pagás nada acá: Mica te confirma el stock y te pasa los datos para transferir.</p>
+        <p class="bolsa__nota">No pagás nada acá: Mica te confirma el stock y te pasa los datos para pagar.</p>
       </form>
     </div>
   </aside>

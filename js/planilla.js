@@ -2,7 +2,7 @@
 // Funciones puras (sin navegador) para poder testearlas con: node --test js/planilla.test.js
 
 /** Columnas que tiene que tener la planilla (la primera fila). Mayúsculas y tildes no importan. */
-export const COLUMNAS = ['codigo', 'nombre', 'categoria', 'precio', 'talles', 'colores', 'foto', 'etiqueta', 'agotado', 'mostrar'];
+export const COLUMNAS = ['codigo', 'nombre', 'categoria', 'precio', 'precio anterior', 'talles', 'talles agotados', 'colores', 'fotos', 'descripcion', 'etiqueta', 'agotado', 'mostrar'];
 
 // Colores que Mica puede escribir con palabras. Si escribe uno que no está, se usa un rosa neutro.
 const TONOS = {
@@ -84,6 +84,11 @@ export function productosDesdeCSV(texto) {
     if (!precio) return avisos.push(`Fila ${numeroFila} (${nombre}): el precio no es válido.`);
     if (!talles.length) return avisos.push(`Fila ${numeroFila} (${nombre}): faltan los talles.`);
 
+    const precioAnterior = leerPrecio(valor('precio anterior'));
+    const agotados = new Set(lista(valor('talles agotados')).map(normalizar));
+    // "Fotos" (o "Foto"): uno o varios links separados por coma, espacio o enter
+    const fotos = (valor('fotos') || valor('foto')).split(/[\s,]+/).map(linkFoto).filter(Boolean);
+
     let codigo = valor('codigo') || `P${numeroFila}`;
     if (usados.has(codigo)) codigo = `${codigo}-${numeroFila}`;
     usados.add(codigo);
@@ -98,11 +103,15 @@ export function productosDesdeCSV(texto) {
       nombre,
       categoria: valor('categoria') || 'Otros',
       precio,
+      precioAnterior: precioAnterior && precioAnterior > precio ? precioAnterior : null,
       talles,
+      tallesAgotados: talles.filter((t) => agotados.has(normalizar(t))),
       colores,
+      descripcion: valor('descripcion').slice(0, 1200),
       etiqueta: valor('etiqueta'),
-      agotado: esSi(valor('agotado')),
-      foto: linkFoto(valor('foto')),
+      // Agotado si se marca así o si se agotaron todos sus talles
+      agotado: esSi(valor('agotado')) || talles.every((t) => agotados.has(normalizar(t))),
+      fotos,
     });
   });
   return { productos, avisos };
@@ -110,3 +119,58 @@ export function productosDesdeCSV(texto) {
 
 /** Las categorías en el orden en que aparecen en la planilla, con "Todo" primero. */
 export const categoriasDe = (productos) => ['Todo', ...new Set(productos.map((p) => p.categoria))];
+
+/** Ordena: primero los que tienen etiqueta (Nuevo, Oferta…), después el resto, y los agotados al final. */
+export const ordenar = (productos) => productos
+  .map((p, i) => ({ p, i }))
+  .sort((a, b) => (a.p.agotado - b.p.agotado) || (!a.p.etiqueta - !b.p.etiqueta) || (a.i - b.i))
+  .map(({ p }) => p);
+
+/** Busca por nombre, categoría, color o descripción, sin importar mayúsculas ni tildes. */
+export function buscar(productos, texto) {
+  const palabras = normalizar(texto).split(/\s+/).filter(Boolean);
+  if (!palabras.length) return productos;
+  const enNombre = (p) => palabras.every((w) => normalizar(`${p.nombre} ${p.categoria}`).includes(w));
+  return productos
+    .filter((p) => {
+      const todo = normalizar([p.nombre, p.categoria, p.codigo, p.descripcion, ...Object.keys(p.colores)].join(' '));
+      return palabras.every((w) => todo.includes(w));
+    })
+    // Primero los que coinciden en el nombre o la categoría; después los que solo lo mencionan en la descripción
+    .sort((a, b) => enNombre(b) - enNombre(a));
+}
+
+/**
+ * Lee la pestaña "Configuración" (dos columnas: Clave | Valor).
+ * Solo toma valores válidos; lo que falte o esté mal queda con el valor por defecto.
+ */
+export function configDesdeCSV(texto, porDefecto) {
+  const config = { ...porDefecto };
+  for (const [clave, valor = ''] of leerCSV(texto)) {
+    const v = valor.trim();
+    switch (normalizar(clave)) {
+      case 'whatsapp': {
+        const numero = v.replace(/\D/g, '');
+        if (numero.length >= 10 && numero.length <= 15) config.whatsapp = numero;
+        break;
+      }
+      case 'envio':
+        if (/^(0|gratis)$/i.test(v)) config.envio = 0;
+        else if (leerPrecio(v)) config.envio = leerPrecio(v);
+        break;
+      case 'envio gratis desde':
+        config.envioGratisDesde = leerPrecio(v) || 0;
+        break;
+      case 'descuento transferencia': {
+        const n = Number(v.replace(/[%\s]/g, '').replace(',', '.'));
+        if (Number.isFinite(n) && n >= 0 && n <= 50) config.descuentoTransferencia = n;
+        break;
+      }
+      case 'avisos':
+        if (v) config.avisos = v.split('|').map((x) => x.trim()).filter(Boolean).slice(0, 8);
+        break;
+      default:
+    }
+  }
+  return config;
+}

@@ -8,12 +8,16 @@ Catálogo para una tienda de lencería de Merlo (Bs. As.): la clienta elige tall
 - **Respaldo:** si no hay planilla configurada o Google no responde, se usa `data/productos-ejemplo.csv`.
 - **Filas con errores** (sin precio, sin talles) se saltean sin romper el catálogo y se avisan en la consola.
 - **Bolsa** guardada en el navegador de cada clienta; nada se guarda en ningún servidor.
-- **Pedido por WhatsApp** con código de producto, talle, color, entrega y total.
+- **Ficha de producto** (se abre con el link `#p/CODIGO`, compartible): galería deslizable, zoom, descripción, talles agotados tachados, "Consultar" y "Avisame cuando vuelva" por WhatsApp.
+- **Ofertas** (precio anterior tachado y % off) y **precio por transferencia**.
+- **Buscador** sin tildes; orden: etiquetados primero, agotados al final.
+- **Pestaña Configuración** en la planilla: WhatsApp, envío, envío gratis desde, % por transferencia y avisos de la cinta.
+- **Pedido por WhatsApp** con código de producto, talle, color, entrega, medio de pago y total.
 
 ## Configurar
 
-- `js/productos.js` → `PLANILLA` (link CSV publicado) y `ENVIO` (costo de envío).
-- `js/app.js` → `CONFIG.whatsapp` (número con código de país, sin `+`).
+- `js/productos.js` → `PLANILLA` y `PLANILLA_CONFIG` (links CSV publicados) y `CONFIG_INICIAL` (valores por defecto).
+- Ejemplos de las dos pestañas: `data/productos-ejemplo.csv` y `data/configuracion-ejemplo.csv`.
 
 ### Publicar la planilla
 

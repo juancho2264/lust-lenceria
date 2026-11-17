@@ -1,11 +1,12 @@
-Código,Nombre,Categoría,Precio,Talles,Colores,Foto,Etiqueta,Agotado,Mostrar
-LU-01,Conjunto Encaje Noir,Conjuntos,18500,"S, M, L","Negro, Bordó",,Más vendido,no,sí
-LU-02,Bikini Vichy,Bikinis,10000,"S, M, L","Rosa, Celeste",,Nuevo,no,sí
-LU-03,Conjunto Rayas,Conjuntos,16000,"S, M, L, XL",Azul marino,,,no,sí
-LU-04,Body Encaje Rosé,Bodys,21000,"S, M, L","Rosa, Negro",,Nuevo,no,sí
-LU-05,Corpiño Flores,Corpiños,12500,"85, 90, 95, 100","Celeste, Blanco",,,no,sí
-LU-06,Bikini Triángulo,Bikinis,11000,"S, M, L","Negro, Rojo",,,no,sí
-LU-07,Bombacha Floreada,Bombachas,4500,"S, M, L, XL","Lila, Rosa",,Básico,no,sí
-LU-08,Conjunto Tul Lila,Conjuntos,17500,"S, M, L",Lila,,,sí,sí
-LU-09,Corpiño Push Up,Corpiños,14000,"85, 90, 95","Negro, Nude",,,no,sí
-LU-10,Pack x3 Bombachas Algodón,Bombachas,11000,"S, M, L, XL",Surtido,,Ahorrá,no,sí
+Código,Nombre,Categoría,Precio,Precio anterior,Talles,Talles agotados,Colores,Fotos,Descripción,Etiqueta,Agotado,Mostrar
+LU-01,Conjunto Encaje Noir,Conjuntos,18500,,"S, M, L",,"Negro, Bordó",,"Corpiño de encaje con aro y push up suave, y vedetina a tono.
+Tela elastizada: calza justo, si dudás pedí un talle más.",Más vendido,no,sí
+LU-02,Bikini Vichy,Bikinis,10000,12500,"S, M, L",L,"Rosa, Celeste",,"Bikini de corpiño triángulo con tazas removibles y bombacha regulable con tiras.",Oferta,no,sí
+LU-03,Conjunto Rayas,Conjuntos,16000,,"S, M, L, XL",,Azul marino,,"Algodón con lycra, ideal para todos los días. Corpiño sin aro.",,no,sí
+LU-04,Body Encaje Rosé,Bodys,21000,,"S, M, L",,"Rosa, Negro",,"Body de encaje con espalda descubierta y broche abajo.",Nuevo,no,sí
+LU-05,Corpiño Flores,Corpiños,12500,,"85, 90, 95, 100",100,"Celeste, Blanco",,"Corpiño con aro, tazas soft y breteles regulables.",,no,sí
+LU-06,Bikini Triángulo,Bikinis,11000,,"S, M, L",,"Negro, Rojo",,"Triángulo clásico con lazos para regular.",,no,sí
+LU-07,Bombacha Floreada,Bombachas,4500,,"S, M, L, XL",,"Lila, Rosa",,"Algodón estampado, tiro medio.",Básico,no,sí
+LU-08,Conjunto Tul Lila,Conjuntos,17500,,"S, M, L",,Lila,,"Tul transparente con bordado floreado.",,sí,sí
+LU-09,Corpiño Push Up,Corpiños,14000,,"85, 90, 95",,"Negro, Nude",,"Push up con relleno removible y aro.",,no,sí
+LU-10,Pack x3 Bombachas Algodón,Bombachas,11000,13500,"S, M, L, XL",,Surtido,,"Tres bombachas de algodón en colores surtidos.",Ahorrá,no,sí
