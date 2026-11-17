@@ -11,6 +11,7 @@ Catálogo para una tienda de lencería de Merlo (Bs. As.): la clienta elige tall
 - **Ficha de producto** (se abre con el link `#p/CODIGO`, compartible): galería deslizable, zoom, descripción, talles agotados tachados, "Consultar" y "Avisame cuando vuelva" por WhatsApp.
 - **Ofertas** (precio anterior tachado y % off) y **precio por transferencia**.
 - **Buscador** sin tildes; orden: etiquetados primero, agotados al final.
+- **Pestañas Talles y Preguntas** en la planilla: tabla de medidas (también dentro de cada producto, con consulta de talle por WhatsApp) y preguntas frecuentes.
 - **Pestaña Configuración** en la planilla: WhatsApp, envío, envío gratis desde, % por transferencia y avisos de la cinta.
 - **Pedido por WhatsApp** con código de producto, talle, color, entrega, medio de pago y total.
 

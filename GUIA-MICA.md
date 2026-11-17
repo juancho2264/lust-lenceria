@@ -69,6 +69,22 @@ Tips:
 | Fotos portada | 2 links de Drive separados por coma | Las 2 fotos grandes de arriba de todo. Vacío = se usan las de siempre |
 | Avisos | `Envíos a todo el país \| Nuevos ingresos` | Los textos de la cinta de arriba, separados por `\|` |
 
+## Pestaña "Talles"
+
+Tu tabla de medidas. La primera fila son los títulos (ej.: Talle, Contorno de busto, Cintura, Cadera) y abajo una fila por talle. Podés usar las columnas que quieras (hasta 6).
+Se ve en la sección "Guía de talles" y dentro de cada producto.
+
+## Pestaña "Preguntas"
+
+Dos columnas: **Pregunta** y **Respuesta**. Cada fila es una pregunta frecuente de la página (hasta 20).
+Para sacar una, borrá la fila. Si dejás la pestaña sin preguntas, la sección desaparece.
+
+## Mensajes que te llegan por WhatsApp
+
+- **Pedido:** productos con código, talle, color, entrega, forma de pago y total.
+- **Consulta por un producto** o **"Avisame cuando vuelva":** con el nombre, el código y el link al producto.
+- **Consulta de talle:** con el producto (si la hizo desde ahí) y un espacio para que la clienta ponga busto, cintura y cadera.
+
 ## Compartir un producto
 
 En cada producto hay un botón **Compartir**: te da un link que abre **justo ese producto**. Ideal para mandar por WhatsApp o poner en una historia.
