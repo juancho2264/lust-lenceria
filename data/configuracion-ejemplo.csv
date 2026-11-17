@@ -1,7 +1,7 @@
-Clave,Valor
-WhatsApp,
-Envío,6000
-Envío gratis desde,0
-Descuento transferencia,0
-Fotos portada,
-Avisos,Envíos a todo el país | Retiro gratis en Merlo | Bikinis desde $10.000 | Nuevos ingresos todas las semanas
+Clave,Valor,Para qué sirve
+WhatsApp,,"Tu número con 549 adelante, sin el 0 ni el 15. Ej.: 5491123456789"
+Envío,6000,Costo del envío a domicilio (0 = gratis)
+Envío gratis desde,0,Compras desde este monto no pagan envío (0 = apagado)
+Descuento transferencia,0,% de descuento pagando por transferencia (0 = apagado)
+Fotos portada,,2 links de Drive separados por coma (vacío = las de siempre)
+Avisos,Envíos a todo el país | Retiro gratis en Merlo | Bikinis desde $10.000 | Nuevos ingresos todas las semanas,Textos de la cinta de arriba separados por |

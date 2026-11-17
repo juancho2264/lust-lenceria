@@ -329,3 +329,10 @@ a { color: inherit; }
 .foto__link img { transition: transform .6s ease; }
 .foto__link:hover img { transform: scale(1.05); }
 .portada__sticker { z-index: 2; }
+
+/* Guía de talles dentro de la ficha */
+.enlace-boton { background: none; border: 0; padding: 0; font: inherit; font-size: .88rem; font-weight: 700; color: var(--vino); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.guia-mini { margin-top: 12px; animation: aparecer .3s both; }
+.guia-mini .tabla-envoltorio { border-radius: 12px; }
+.guia-mini .tabla th, .guia-mini .tabla td { padding: 8px 6px; font-size: .82rem; }
+.guia-mini__nota { margin: 8px 0 0; font-size: .82rem; color: var(--suave); }

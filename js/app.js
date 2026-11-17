@@ -174,6 +174,7 @@ function abrirFicha(p) {
   $('ficha-descripcion').hidden = !p.descripcion;
   $('ficha-error').textContent = '';
   $('ficha-color').textContent = elegido.color;
+  mostrarGuia(false);
 
   $('ficha-colores').replaceChildren(...Object.entries(p.colores).map(([nombre, tono]) => {
     const b = el('button', 'color');
@@ -220,6 +221,18 @@ function abrirFicha(p) {
   ficha.querySelector('.ficha__info').scrollTop = 0;
   document.title = `${p.nombre} · Lust Lencería`;
 }
+
+// Guía de talles dentro de la ficha (una copia de la tabla de la página, sin salir del producto)
+function mostrarGuia(mostrar) {
+  const guia = $('guia-mini');
+  if (mostrar && !guia.childElementCount) {
+    guia.append($('talles').querySelector('.tabla-envoltorio').cloneNode(true), el('p', 'guia-mini__nota', '¿Dudás entre dos talles? Tocá "Consultar por este producto" y te ayudo.'));
+  }
+  guia.hidden = !mostrar;
+  $('ver-guia').setAttribute('aria-expanded', String(mostrar));
+  $('ver-guia').textContent = mostrar ? '✕ Cerrar guía' : '📏 Guía de talles';
+}
+$('ver-guia').addEventListener('click', () => mostrarGuia($('guia-mini').hidden));
 
 $('ficha-agregar').addEventListener('click', () => {
   if (!elegido.talle) {
