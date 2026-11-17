@@ -53,6 +53,7 @@ Tips:
 | Envío | `6000` | Costo del envío |
 | Envío gratis desde | `50000` | Compras desde ese monto no pagan envío (`0` = nunca) |
 | Descuento transferencia | `10` | % de descuento pagando por transferencia (`0` = sin descuento) |
+| Fotos portada | 2 links de Drive separados por coma | Las 2 fotos grandes de arriba de todo. Vacío = se usan las de siempre |
 | Avisos | `Envíos a todo el país \| Nuevos ingresos` | Los textos de la cinta de arriba, separados por `\|` |
 
 ## Compartir un producto

@@ -166,6 +166,11 @@ export function configDesdeCSV(texto, porDefecto) {
         if (Number.isFinite(n) && n >= 0 && n <= 50) config.descuentoTransferencia = n;
         break;
       }
+      case 'fotos portada': {
+        const fotos = v.split(/[\s,]+/).map(linkFoto).filter(Boolean);
+        if (fotos.length) config.fotosPortada = fotos.slice(0, 2);
+        break;
+      }
       case 'avisos':
         if (v) config.avisos = v.split('|').map((x) => x.trim()).filter(Boolean).slice(0, 8);
         break;

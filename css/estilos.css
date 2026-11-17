@@ -321,3 +321,11 @@ a { color: inherit; }
   .galeria--varias .galeria__flecha { display: none; }
   .precios__transferencia { font-size: .74rem; }
 }
+
+/* Fotos reales en la portada */
+.portada__fotos .foto { overflow: hidden; }
+.portada__fotos .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.foto__link { position: absolute; inset: 0; }
+.foto__link img { transition: transform .6s ease; }
+.foto__link:hover img { transform: scale(1.05); }
+.portada__sticker { z-index: 2; }

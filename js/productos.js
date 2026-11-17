@@ -17,5 +17,11 @@ export const CONFIG_INICIAL = {
   envio: 6000,
   envioGratisDesde: 0, // 0 = sin envío gratis
   descuentoTransferencia: 0, // % de descuento pagando por transferencia (0 = sin descuento)
+  // Las 2 fotos de la portada (links de Google Drive). Si en Configuración "Fotos portada" está vacío, se usan estas;
+  // si tampoco hay, se toman las de los productos con etiqueta (Nuevo, Oferta…).
+  fotosPortada: [
+    'https://drive.google.com/file/d/1-j-eJH_hHh41aQtZ74C1J1zvk6srJ2DE/view?usp=sharing',
+    'https://drive.google.com/file/d/1TKqXOu0cnAJohnzxG6c0ikFFo_bOCr_r/view?usp=sharing',
+  ],
   avisos: ['Envíos a todo el país', 'Retiro gratis en Merlo', 'Bikinis desde $10.000', 'Nuevos ingresos todas las semanas'],
 };

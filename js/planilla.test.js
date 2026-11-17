@@ -95,3 +95,10 @@ test('la configuración solo acepta valores válidos', async () => {
   assert.equal(mala.whatsapp, '');
   assert.equal(mala.descuentoTransferencia, 0);
 });
+
+test('fotos de portada desde Configuración (máximo 2, solo links válidos)', async () => {
+  const { configDesdeCSV } = await import('./planilla.js');
+  const c = configDesdeCSV('Fotos portada,"https://drive.google.com/file/d/1-j-eJH_hHh41aQtZ74C1J1zvk6srJ2DE/view, javascript:x, https://a.com/2.jpg, https://a.com/3.jpg"', { fotosPortada: [] });
+  assert.deepEqual(c.fotosPortada, ['https://drive.google.com/thumbnail?id=1-j-eJH_hHh41aQtZ74C1J1zvk6srJ2DE&sz=w900', 'https://a.com/2.jpg']);
+  assert.deepEqual(configDesdeCSV('Fotos portada,', { fotosPortada: ['x'] }).fotosPortada, ['x'], 'vacío deja las de siempre');
+});

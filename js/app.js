@@ -1,5 +1,5 @@
 import { CONFIG_INICIAL, PLANILLA, PLANILLA_CONFIG, RESPALDO } from './productos.js';
-import { buscar, categoriasDe, configDesdeCSV, ordenar, productosDesdeCSV } from './planilla.js';
+import { buscar, categoriasDe, configDesdeCSV, linkFoto, ordenar, productosDesdeCSV } from './planilla.js';
 
 let CONFIG = { ...CONFIG_INICIAL };
 let PRODUCTOS = [];
@@ -442,6 +442,31 @@ function aplicarConfig() {
   });
 }
 
+// ---------- Portada: fotos de Configuración, o las de los productos nuevos ----------
+function dibujarPortada() {
+  const propias = (CONFIG.fotosPortada ?? []).map(linkFoto).filter(Boolean).map((url) => ({ url }));
+  const deProductos = ordenar(PRODUCTOS.filter((p) => p.fotos.length && !p.agotado))
+    .map((p) => ({ url: p.fotos[0], producto: p }));
+  const fotos = [...propias, ...deProductos].slice(0, 2);
+  document.querySelectorAll('.portada__fotos .foto').forEach((marco, i) => {
+    marco.replaceChildren();
+    const foto = fotos[i];
+    if (!foto) return;
+    const img = el('img');
+    img.src = foto.url;
+    img.alt = foto.producto ? foto.producto.nombre : 'Lust Lencería';
+    img.referrerPolicy = 'no-referrer';
+    img.addEventListener('error', () => img.remove());
+    if (foto.producto) {
+      const link = el('a', 'foto__link');
+      link.href = `#p/${encodeURIComponent(foto.producto.id)}`;
+      link.setAttribute('aria-label', `Ver ${foto.producto.nombre}`);
+      link.append(img);
+      marco.append(link);
+    } else marco.append(img);
+  });
+}
+
 // ---------- Arranque ----------
 async function leerTexto(url) {
   const r = await fetch(url, { cache: 'no-store' });
@@ -482,6 +507,7 @@ aplicarConfig();
 Promise.all([cargarConfig(), cargarCatalogo()])
   .then(() => {
     aplicarConfig();
+    dibujarPortada();
     dibujarFiltros();
     dibujarProductos();
     dibujarBolsa();
