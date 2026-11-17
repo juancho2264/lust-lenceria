@@ -8,7 +8,7 @@ export const RESPALDO = 'data/productos-ejemplo.csv';
 
 // PLANILLA_CONFIG: link de la pestaña "Configuración" publicada como CSV (opcional).
 // Ahí Mica cambia el WhatsApp, el envío, el descuento por transferencia y los avisos de la cinta.
-export const PLANILLA_CONFIG = '';
+export const PLANILLA_CONFIG = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQzLOcUbBUEBv97PWVXJB_Ic7rVe4DNkwJrErivueO27XMZqwOiHSPlWNAbQeh1RkVeieWb2v_1tAXi/pub?gid=389741764&single=true&output=csv';
 
 // Valores por defecto (se usan si la pestaña Configuración no está o le falta algo)
 export const CONFIG_INICIAL = {
