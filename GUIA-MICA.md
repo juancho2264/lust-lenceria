@@ -84,7 +84,7 @@ Acá se cambian las cosas generales de la página. **Solo tocá la columna Valor
 | **Envío gratis desde** | `50000` | Compras desde ese monto no pagan envío. Se anuncia solo en toda la página (`0` = apagado) |
 | **Descuento transferencia** | `10` | % de descuento pagando por transferencia (`0` = apagado) |
 | **Fotos portada** | 2 links de Drive separados por coma | Las 2 fotos grandes de arriba de todo (mejor verticales). Vacío = quedan las de siempre |
-| **Avisos** | `Envíos a todo el país \| Nuevos ingresos` | Los textos de la cinta rosa de arriba, separados por una barra `\|` (hasta 8). Ideal para promos |
+| **Avisos** | `Envíos a todo el país &#124; Nuevos ingresos` | Los textos de la cinta rosa de arriba, separados por una barra `&#124;` (hasta 8). Ideal para promos |
 
 > La barra `|` en el celu está en el teclado de símbolos (#+=).
 
