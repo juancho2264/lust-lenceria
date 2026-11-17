@@ -113,3 +113,17 @@ test('colores escritos de muchas formas encuentran su tono', async () => {
   assert.equal(tonoDe('Rosa chicle flúo'), '#ff6fa8');
   assert.equal(tonoDe('Xyz'), '#e9c6d0', 'desconocido = rosa neutro');
 });
+
+test('la tabla de talles acepta cualquier columna y se limita', async () => {
+  const { tablaDesdeCSV } = await import('./planilla.js');
+  const t = tablaDesdeCSV('Talle,Busto,Cintura,Cadera\nS,80-85,62-66,88-92\nM,85-90,66-70,92-96\n,,,');
+  assert.deepEqual(t.encabezado, ['Talle', 'Busto', 'Cintura', 'Cadera']);
+  assert.equal(t.filas.length, 2, 'las filas vacías no cuentan');
+  assert.equal(tablaDesdeCSV('Talle,Busto'), null, 'solo títulos = sin tabla');
+});
+
+test('preguntas: saltea las incompletas', async () => {
+  const { preguntasDesdeCSV } = await import('./planilla.js');
+  const p = preguntasDesdeCSV('Pregunta,Respuesta\n¿El envío es discreto?,"Sí, sin marca"\n¿Sin respuesta?,\n,Sin pregunta');
+  assert.deepEqual(p, [{ pregunta: '¿El envío es discreto?', respuesta: 'Sí, sin marca' }]);
+});

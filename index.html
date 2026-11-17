@@ -29,6 +29,7 @@
       <a href="#catalogo">Catálogo</a>
       <a href="#como-comprar">Cómo comprar</a>
       <a href="#talles">Talles</a>
+      <a href="#preguntas" id="menu-preguntas" hidden>Preguntas</a>
     </nav>
     <button type="button" class="boton-bolsa" id="abrir-bolsa" aria-label="Ver mi bolsa">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M5 8h14l-1.2 12H6.2L5 8Zm3.5 0V6.5a3.5 3.5 0 0 1 7 0V8"/></svg>
@@ -105,21 +106,20 @@
         <p class="manuscrita">para que no falle</p>
         <h2>Guía de talles</h2>
       </div>
-      <div class="tabla-envoltorio">
-        <table class="tabla">
-          <thead><tr><th>Talle</th><th>Contorno de busto</th><th>Cintura</th><th>Cadera</th></tr></thead>
-          <tbody>
-            <tr><td>S</td><td>80–85 cm</td><td>62–66 cm</td><td>88–92 cm</td></tr>
-            <tr><td>M</td><td>85–90 cm</td><td>66–70 cm</td><td>92–96 cm</td></tr>
-            <tr><td>L</td><td>90–95 cm</td><td>70–76 cm</td><td>96–102 cm</td></tr>
-            <tr><td>XL</td><td>95–102 cm</td><td>76–82 cm</td><td>102–108 cm</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="nota">¿Dudás entre dos talles? Escribime y te ayudo a elegir antes de comprar.</p>
+      <div id="tabla-talles"></div>
+      <p class="nota">¿Dudás entre dos talles? Mandame tus medidas y te digo cuál te va.</p>
+      <p class="nota"><a class="boton boton--borde" data-whatsapp-talle>📏 Consultar mi talle</a></p>
       <div class="aviso-cambios">
         <strong>Importante:</strong> por higiene, la ropa interior <strong>no tiene cambio</strong>. Por eso te ayudo con el talle antes de que compres.
       </div>
+    </section>
+
+    <section class="seccion seccion--rosa" id="preguntas" hidden>
+      <div class="seccion__titulo">
+        <p class="manuscrita">lo que más me preguntan</p>
+        <h2>Preguntas frecuentes</h2>
+      </div>
+      <div class="preguntas" id="lista-preguntas"></div>
     </section>
 
     <section class="cierre">

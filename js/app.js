@@ -1,5 +1,9 @@
-import { CONFIG_INICIAL, PLANILLA, PLANILLA_CONFIG, RESPALDO } from './productos.js';
-import { buscar, categoriasDe, configDesdeCSV, linkFoto, ordenar, productosDesdeCSV } from './planilla.js';
+import {
+  CONFIG_INICIAL, PLANILLA, PLANILLA_CONFIG, PLANILLA_PREGUNTAS, PLANILLA_TALLES, RESPALDO, RESPALDO_PREGUNTAS, RESPALDO_TALLES,
+} from './productos.js';
+import {
+  buscar, categoriasDe, configDesdeCSV, linkFoto, ordenar, preguntasDesdeCSV, productosDesdeCSV, tablaDesdeCSV,
+} from './planilla.js';
 
 let CONFIG = { ...CONFIG_INICIAL };
 let PRODUCTOS = [];
@@ -13,6 +17,7 @@ const conDescuento = (precio) => precio * (1 - CONFIG.descuentoTransferencia / 1
 const linkWhatsapp = (texto) => (CONFIG.whatsapp
   ? `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`
   : CONFIG.instagram);
+const MENSAJE_TALLE = 'Mis medidas son:\n• Busto: \n• Cintura: \n• Cadera: \n¿Qué talle me recomendás?';
 const linkProducto = (p) => `${location.origin}${location.pathname}#p/${encodeURIComponent(p.id)}`;
 
 /** Crea un elemento con texto seguro (nunca innerHTML con datos de la planilla). */
@@ -225,8 +230,14 @@ function abrirFicha(p) {
 // Guía de talles dentro de la ficha (una copia de la tabla de la página, sin salir del producto)
 function mostrarGuia(mostrar) {
   const guia = $('guia-mini');
-  if (mostrar && !guia.childElementCount) {
-    guia.append($('talles').querySelector('.tabla-envoltorio').cloneNode(true), el('p', 'guia-mini__nota', '¿Dudás entre dos talles? Tocá "Consultar por este producto" y te ayudo.'));
+  if (mostrar) {
+    const tabla = $('tabla-talles').querySelector('.tabla-envoltorio');
+    const consultar = el('a', 'boton boton--borde boton--ancho', '📏 Consultar mi talle por WhatsApp');
+    consultar.href = linkWhatsapp(`Hola Mica! Tengo dudas con el talle de: ${actual.nombre} (cód. ${actual.codigo})\n${MENSAJE_TALLE}`);
+    consultar.target = '_blank';
+    consultar.rel = 'noopener';
+    guia.replaceChildren(...(tabla ? [tabla.cloneNode(true)] : []),
+      el('p', 'guia-mini__nota', '¿Dudás entre dos talles? Mandame tus medidas y te digo cuál te va.'), consultar);
   }
   guia.hidden = !mostrar;
   $('ver-guia').setAttribute('aria-expanded', String(mostrar));
@@ -461,6 +472,11 @@ function aplicarConfig() {
   const descuento = CONFIG.descuentoTransferencia > 0 ? `${CONFIG.descuentoTransferencia}% off` : '';
   $('etiqueta-descuento').textContent = descuento;
   $('pagos-descuento').textContent = descuento ? `(${descuento})` : '';
+  document.querySelectorAll('[data-whatsapp-talle]').forEach((b) => {
+    b.href = linkWhatsapp(`Hola Mica! Tengo dudas con el talle.\n${MENSAJE_TALLE}`);
+    b.target = '_blank';
+    b.rel = 'noopener';
+  });
   document.querySelectorAll('[data-whatsapp]').forEach((b) => {
     b.href = linkWhatsapp(b.dataset.whatsapp);
     b.target = '_blank';
@@ -529,7 +545,47 @@ async function cargarCatalogo() {
   guardar();
 }
 
+/** Lee una pestaña opcional; si no está o falla, usa el ejemplo. */
+async function leerOpcional(url, respaldo, convertir) {
+  try {
+    if (url) {
+      const datos = convertir(await leerTexto(url));
+      if (datos && (!Array.isArray(datos) || datos.length)) return datos;
+    }
+  } catch (error) { console.warn('No se pudo leer una pestaña, uso el ejemplo:', error.message); }
+  try { return convertir(await leerTexto(respaldo)); } catch { return null; }
+}
+
+async function cargarTalles() {
+  const tabla = await leerOpcional(PLANILLA_TALLES, RESPALDO_TALLES, tablaDesdeCSV);
+  const caja = $('tabla-talles');
+  if (!tabla) { caja.replaceChildren(); return; }
+  const envoltorio = el('div', 'tabla-envoltorio');
+  const t = el('table', 'tabla');
+  const thead = el('thead'); const tr = el('tr');
+  tabla.encabezado.forEach((c) => tr.append(el('th', null, c)));
+  thead.append(tr);
+  const tbody = el('tbody');
+  tabla.filas.forEach((fila) => { const r = el('tr'); fila.forEach((c) => r.append(el('td', null, c))); tbody.append(r); });
+  t.append(thead, tbody);
+  envoltorio.append(t);
+  caja.replaceChildren(envoltorio);
+}
+
+async function cargarPreguntas() {
+  const preguntas = await leerOpcional(PLANILLA_PREGUNTAS, RESPALDO_PREGUNTAS, preguntasDesdeCSV) ?? [];
+  $('lista-preguntas').replaceChildren(...preguntas.map(({ pregunta, respuesta }) => {
+    const d = el('details');
+    d.append(el('summary', null, pregunta), el('p', null, respuesta));
+    return d;
+  }));
+  $('preguntas').hidden = !preguntas.length;
+  $('menu-preguntas').hidden = !preguntas.length;
+}
+
 aplicarConfig();
+cargarTalles();
+cargarPreguntas();
 Promise.all([cargarConfig(), cargarCatalogo()])
   .then(() => {
     aplicarConfig();

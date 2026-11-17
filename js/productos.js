@@ -10,6 +10,13 @@ export const RESPALDO = 'data/productos-ejemplo.csv';
 // Ahí Mica cambia el WhatsApp, el envío, el descuento por transferencia y los avisos de la cinta.
 export const PLANILLA_CONFIG = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQzLOcUbBUEBv97PWVXJB_Ic7rVe4DNkwJrErivueO27XMZqwOiHSPlWNAbQeh1RkVeieWb2v_1tAXi/pub?gid=389741764&single=true&output=csv';
 
+// PLANILLA_TALLES y PLANILLA_PREGUNTAS: links de las pestañas "Talles" y "Preguntas" publicadas como CSV (opcionales).
+// Mientras estén vacíos se usan los ejemplos de data/.
+export const PLANILLA_TALLES = '';
+export const PLANILLA_PREGUNTAS = '';
+export const RESPALDO_TALLES = 'data/talles-ejemplo.csv';
+export const RESPALDO_PREGUNTAS = 'data/preguntas-ejemplo.csv';
+
 // Valores por defecto (se usan si la pestaña Configuración no está o le falta algo)
 export const CONFIG_INICIAL = {
   whatsapp: '', // con código de país, sin + ni espacios. Ej.: '5491123456789'

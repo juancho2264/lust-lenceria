@@ -350,3 +350,13 @@ a { color: inherit; }
 .envio-gratis--listo #envio-gratis-texto { color: #1f8a4c; }
 .envio-gratis--listo .envio-gratis__barra span { background: #1f8a4c; }
 #vacia-envio { display: block; margin: 6px 0; font-weight: 700; color: var(--vino); }
+
+/* Preguntas frecuentes */
+.preguntas { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
+.preguntas details { background: #fff; border-radius: 14px; border: 1px solid var(--borde); padding: 16px 20px; }
+.preguntas summary { cursor: pointer; font-weight: 700; color: var(--vino); list-style: none; display: flex; justify-content: space-between; gap: 14px; }
+.preguntas summary::-webkit-details-marker { display: none; }
+.preguntas summary::after { content: '+'; font-size: 1.4rem; line-height: 1; color: var(--rosa-fuerte); transition: transform .2s; }
+.preguntas details[open] summary::after { transform: rotate(45deg); }
+.preguntas details p { margin: 10px 0 0; color: var(--suave); white-space: pre-line; }
+.guia-mini .boton { margin-top: 10px; }

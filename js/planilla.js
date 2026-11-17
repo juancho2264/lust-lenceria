@@ -223,3 +223,25 @@ export function configDesdeCSV(texto, porDefecto) {
   }
   return config;
 }
+
+/**
+ * Pestaña "Talles": una tabla libre (la primera fila son los títulos: Talle, Busto, Cintura…).
+ * Devuelve null si está vacía. Limita el tamaño para que nunca rompa el diseño.
+ */
+export function tablaDesdeCSV(texto) {
+  const filas = leerCSV(texto).map((f) => f.map((c) => c.trim().slice(0, 40)));
+  if (filas.length < 2) return null;
+  const columnas = Math.min(6, Math.max(...filas.map((f) => f.filter(Boolean).length)));
+  const [encabezado, ...resto] = filas.map((f) => f.slice(0, columnas));
+  const cuerpo = resto.filter((f) => f.some(Boolean)).slice(0, 30);
+  return cuerpo.length ? { encabezado, filas: cuerpo } : null;
+}
+
+/** Pestaña "Preguntas": dos columnas, Pregunta | Respuesta. Saltea las filas incompletas. */
+export function preguntasDesdeCSV(texto) {
+  const [, ...filas] = leerCSV(texto);
+  return filas
+    .map(([pregunta = '', respuesta = '']) => ({ pregunta: pregunta.trim().slice(0, 200), respuesta: respuesta.trim().slice(0, 1200) }))
+    .filter((p) => p.pregunta && p.respuesta)
+    .slice(0, 20);
+}
