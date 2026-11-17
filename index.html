@@ -59,7 +59,7 @@
       <li><span aria-hidden="true">💬</span><strong>Atención personal</strong>Te respondo yo por WhatsApp</li>
       <li><span aria-hidden="true">📏</span><strong>Te ayudo con el talle</strong>Antes de que compres</li>
       <li><span aria-hidden="true">🔒</span><strong>Pagás al confirmar</strong>Primero te confirmo el stock</li>
-      <li><span aria-hidden="true">📦</span><strong>Envíos a todo el país</strong>O retirás gratis en Merlo</li>
+      <li><span aria-hidden="true">📦</span><strong>Envíos a todo el país</strong><span id="confianza-envio">O retirás gratis en Merlo</span></li>
     </ul>
 
     <!-- CATÁLOGO -->
@@ -172,7 +172,7 @@
         <ul class="ficha__confianza">
           <li>🔒 No pagás nada acá: primero te confirmo el stock.</li>
           <li>📏 ¿Dudás con el talle? Escribime y te ayudo.</li>
-          <li>📦 Envío a todo el país o retiro gratis en Merlo.</li>
+          <li id="ficha-envio">📦 Envío a todo el país o retiro gratis en Merlo.</li>
           <li>ℹ️ Por higiene, la ropa interior no tiene cambio.</li>
         </ul>
       </div>
@@ -195,9 +195,9 @@
     </div>
     <div class="bolsa__cuerpo">
       <ul class="bolsa__lista" id="lista-bolsa"></ul>
-      <p class="bolsa__vacia" id="bolsa-vacia">Tu bolsa está vacía.<br><a href="#catalogo" data-cerrar-bolsa>Ver catálogo</a></p>
+      <p class="bolsa__vacia" id="bolsa-vacia">Tu bolsa está vacía.<br><span id="vacia-envio"></span><a href="#catalogo" data-cerrar-bolsa>Ver catálogo</a></p>
       <form class="bolsa__form" id="form-pedido" novalidate>
-        <p class="envio-gratis" id="envio-gratis" hidden></p>
+        <div class="envio-gratis" id="envio-gratis" hidden><p id="envio-gratis-texto"></p><div class="envio-gratis__barra"><span id="envio-gratis-avance"></span></div><p class="envio-gratis__montos"><span id="envio-gratis-llevas"></span><span id="envio-gratis-meta"></span></p></div>
         <fieldset class="entrega">
           <legend>¿Cómo lo recibís?</legend>
           <label><input type="radio" name="entrega" value="retiro" checked><span>Retiro en Merlo <b>Gratis</b></span></label>

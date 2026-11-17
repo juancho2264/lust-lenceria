@@ -375,8 +375,13 @@ function dibujarBolsa() {
   aviso.hidden = !CONFIG.envioGratisDesde;
   if (CONFIG.envioGratisDesde) {
     const falta = CONFIG.envioGratisDesde - c.productos;
-    aviso.textContent = falta > 0 ? `Te faltan ${pesos(falta)} para el envío gratis 🚚` : '¡Tenés envío gratis! 🎉';
-    aviso.style.setProperty('--avance', `${Math.min(100, (c.productos / CONFIG.envioGratisDesde) * 100)}%`);
+    aviso.classList.toggle('envio-gratis--listo', falta <= 0);
+    $('envio-gratis-texto').textContent = falta > 0
+      ? `🚚 Sumá ${pesos(falta)} más y el envío te sale gratis`
+      : '🎉 ¡Llegaste! Tu envío es gratis';
+    $('envio-gratis-avance').style.width = `${Math.min(100, (c.productos / CONFIG.envioGratisDesde) * 100)}%`;
+    $('envio-gratis-llevas').textContent = `Llevás ${pesos(c.productos)}`;
+    $('envio-gratis-meta').textContent = `Envío gratis desde ${pesos(CONFIG.envioGratisDesde)}`;
   }
 }
 
@@ -442,9 +447,17 @@ function avisar(texto) {
 
 // ---------- Datos que vienen de la configuración ----------
 function aplicarConfig() {
-  const avisos = CONFIG.avisos.length ? CONFIG.avisos : CONFIG_INICIAL.avisos;
+  const gratis = CONFIG.envioGratisDesde > 0 ? `Envío gratis desde ${pesos(CONFIG.envioGratisDesde)}` : '';
+  let avisos = CONFIG.avisos.length ? CONFIG.avisos : CONFIG_INICIAL.avisos;
+  // Si hay envío gratis, se anuncia primero en la cinta (salvo que Mica ya lo haya escrito)
+  if (gratis && !avisos.some((a) => /gratis desde/i.test(a))) avisos = [`🚚 ${gratis}`, ...avisos];
   $('avisos').replaceChildren(...[...avisos, ...avisos].map((a) => el('span', null, a)));
-  $('precio-envio').textContent = pesos(CONFIG.envio);
+  $('confianza-envio').textContent = gratis ? `${gratis} · o retirás en Merlo` : 'O retirás gratis en Merlo';
+  $('ficha-envio').textContent = gratis
+    ? `📦 Envío a todo el país (gratis desde ${pesos(CONFIG.envioGratisDesde)}) o retiro gratis en Merlo.`
+    : '📦 Envío a todo el país o retiro gratis en Merlo.';
+  $('vacia-envio').textContent = gratis ? `🚚 ${gratis}` : '';
+  $('precio-envio').textContent = CONFIG.envio ? pesos(CONFIG.envio) : 'Gratis';
   const descuento = CONFIG.descuentoTransferencia > 0 ? `${CONFIG.descuentoTransferencia}% off` : '';
   $('etiqueta-descuento').textContent = descuento;
   $('pagos-descuento').textContent = descuento ? `(${descuento})` : '';
