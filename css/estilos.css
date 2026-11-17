@@ -216,9 +216,10 @@ a { color: inherit; }
 
 /* Franja de confianza */
 .confianza { list-style: none; margin: 0; padding: 22px var(--lado); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; background: #fff; border-block: 1px solid var(--borde); }
-.confianza li { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; font-size: .85rem; color: var(--suave); line-height: 1.35; }
-.confianza span { grid-row: span 2; font-size: 1.6rem; }
-.confianza strong { color: var(--vino); font-size: .95rem; }
+.confianza li { display: flex; align-items: center; gap: 12px; line-height: 1.35; }
+.confianza__icono { flex: none; font-size: 1.6rem; }
+.confianza strong { display: block; color: var(--vino); font-size: .95rem; }
+.confianza small { display: block; color: var(--suave); font-size: .85rem; }
 
 /* Buscador */
 .buscador { display: flex; align-items: center; gap: 10px; max-width: 480px; margin: 0 auto 16px; padding: 0 16px; border: 1px solid var(--borde); border-radius: 999px; background: #fff; transition: border-color .2s, box-shadow .2s; }
@@ -313,7 +314,7 @@ a { color: inherit; }
 
 @media (max-width: 860px) {
   .confianza { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-block: 18px; }
-  .confianza li { font-size: .78rem; }
+  .confianza strong { font-size: .85rem; } .confianza small { font-size: .76rem; } .confianza__icono { font-size: 1.3rem; }
   .ficha { max-height: 100dvh; height: 100dvh; width: 100%; border-radius: 0; margin: 0; max-width: none; }
   .ficha__grilla { display: block; height: 100%; overflow-y: auto; }
   .ficha__info { max-height: none; overflow: visible; padding: 22px 18px 40px; }
