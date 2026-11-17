@@ -102,3 +102,14 @@ test('fotos de portada desde Configuración (máximo 2, solo links válidos)', a
   assert.deepEqual(c.fotosPortada, ['https://drive.google.com/thumbnail?id=1-j-eJH_hHh41aQtZ74C1J1zvk6srJ2DE&sz=w900', 'https://a.com/2.jpg']);
   assert.deepEqual(configDesdeCSV('Fotos portada,', { fotosPortada: ['x'] }).fotosPortada, ['x'], 'vacío deja las de siempre');
 });
+
+test('colores escritos de muchas formas encuentran su tono', async () => {
+  const { tonoDe } = await import('./planilla.js');
+  assert.equal(tonoDe('Verde lima'), '#b5d334');
+  assert.equal(tonoDe('VERDE LIMA'), '#b5d334');
+  assert.equal(tonoDe('Bordó'), tonoDe('bordo'));
+  assert.equal(tonoDe('Negros'), '#1f1a1c', 'plural');
+  assert.equal(tonoDe('Verde pino'), '#5fae7e', 'si no conoce el tono exacto usa el color base');
+  assert.equal(tonoDe('Rosa chicle flúo'), '#ff6fa8');
+  assert.equal(tonoDe('Xyz'), '#e9c6d0', 'desconocido = rosa neutro');
+});

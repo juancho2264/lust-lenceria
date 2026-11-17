@@ -6,14 +6,58 @@ export const COLUMNAS = ['codigo', 'nombre', 'categoria', 'precio', 'precio ante
 
 // Colores que Mica puede escribir con palabras. Si escribe uno que no está, se usa un rosa neutro.
 const TONOS = {
-  negro: '#1f1a1c', blanco: '#f7f3f1', rosa: '#f4a7bd', 'rosa viejo': '#d9a3ab', fucsia: '#d63384', rojo: '#d23a4a',
-  bordo: '#7a1f35', 'bordó': '#7a1f35', vino: '#7a1f35', nude: '#e7c3ad', beige: '#e8d8c4', crema: '#f3e9d8',
-  celeste: '#a9d4ec', azul: '#3557a8', 'azul marino': '#1e2a44', verde: '#7fb99a', 'verde agua': '#9fd8cb',
-  lila: '#cdb6ea', violeta: '#8a5cc2', amarillo: '#f3d36b', naranja: '#f19a5b', gris: '#a3a3a8', marron: '#7a5643', 'marrón': '#7a5643',
+  // Básicos
+  negro: '#1f1a1c', blanco: '#f7f3f1', 'blanco hueso': '#eee6d8', 'off white': '#eee6d8', crema: '#f3e9d8', marfil: '#f3ecdc',
+  gris: '#a3a3a8', 'gris claro': '#cfcfd4', 'gris topo': '#8b8079', topo: '#8b8079', 'gris oscuro': '#55555b', plomo: '#6e6e74',
+  nude: '#e7c3ad', piel: '#e7c3ad', beige: '#e8d8c4', camel: '#c19a6b', arena: '#d9c3a0', champagne: '#f1dfc2',
+  marron: '#7a5643', chocolate: '#5b3a29', cafe: '#6b4a37', habano: '#8a5a3c', terracota: '#c0674a', ladrillo: '#a2493a',
+  // Rosas y rojos
+  rosa: '#f4a7bd', 'rosa claro': '#f9cdd8', 'rosa pastel': '#f9cdd8', 'rosa bebe': '#f9cdd8', 'rosa viejo': '#d9a3ab',
+  'rosa chicle': '#ff6fa8', 'rosa fuerte': '#e8457e', fucsia: '#d63384', magenta: '#c2186e', coral: '#f47b6b', salmon: '#f59c86',
+  durazno: '#f8b98f', rojo: '#d23a4a', bordo: '#7a1f35', vino: '#7a1f35', borravino: '#6b1a2e', cereza: '#a3142f', frambuesa: '#c2265a',
+  // Violetas
+  lila: '#cdb6ea', lavanda: '#c8b8e8', violeta: '#8a5cc2', morado: '#6c3a9c', purpura: '#6c3a9c', ciruela: '#6a2c55', uva: '#5a2a6e',
+  // Azules
+  celeste: '#a9d4ec', 'celeste bebe': '#cfe6f5', 'azul claro': '#9ec3ea', azul: '#3557a8', 'azul francia': '#2f4fd1', 'azul rey': '#2a4bb8',
+  'azul marino': '#1e2a44', marino: '#1e2a44', jean: '#4f6d93', petroleo: '#1f5a66', turquesa: '#2bb5b8', aqua: '#7fdbd6', 'agua marina': '#7fdbd6',
+  // Verdes
+  verde: '#5fae7e', 'verde claro': '#a8d8b0', 'verde agua': '#9fd8cb', menta: '#a8e6cf', 'verde menta': '#a8e6cf', 'verde lima': '#b5d334', lima: '#b5d334',
+  'verde manzana': '#8cc63f', 'verde oscuro': '#2f5d3a', 'verde ingles': '#1f4d34', 'verde militar': '#5b6236', militar: '#5b6236', oliva: '#7c7a3a',
+  'verde oliva': '#7c7a3a', esmeralda: '#1f9d6b', 'verde benetton': '#1f9d4b', salvia: '#9cae95',
+  // Amarillos y naranjas
+  amarillo: '#f3d36b', 'amarillo pastel': '#f8e7a1', mostaza: '#d4a72c', dorado: '#d4af37', oro: '#d4af37', naranja: '#f19a5b', 'naranja fluo': '#ff7a1a',
+  plateado: 'linear-gradient(135deg,#e6e6ea,#a9a9b2,#e6e6ea)', plata: 'linear-gradient(135deg,#e6e6ea,#a9a9b2,#e6e6ea)',
+  // Estampados
   animal: 'repeating-linear-gradient(45deg,#c79a5b 0 6px,#3a2a1c 6px 10px)', 'animal print': 'repeating-linear-gradient(45deg,#c79a5b 0 6px,#3a2a1c 6px 10px)',
-  surtido: 'linear-gradient(135deg,#f4a7bd,#bcdcf2,#cdb6ea)', estampado: 'linear-gradient(135deg,#f4a7bd,#bcdcf2,#cdb6ea)',
+  leopardo: 'radial-gradient(circle at 30% 30%,#3a2a1c 0 3px,transparent 4px) 0 0/9px 9px,#c79a5b', cebra: 'repeating-linear-gradient(60deg,#f7f3f1 0 4px,#1f1a1c 4px 8px)',
+  vichy: 'repeating-linear-gradient(0deg,#f4a7bd55 0 4px,transparent 4px 8px),repeating-linear-gradient(90deg,#f4a7bd 0 4px,#fff 4px 8px)',
+  rayado: 'repeating-linear-gradient(90deg,#1e2a44 0 3px,#f7f3f1 3px 7px)', rayas: 'repeating-linear-gradient(90deg,#1e2a44 0 3px,#f7f3f1 3px 7px)',
+  floreado: 'radial-gradient(circle,#f4a7bd 0 2px,transparent 3px) 0 0/8px 8px,#f7f3f1', flores: 'radial-gradient(circle,#f4a7bd 0 2px,transparent 3px) 0 0/8px 8px,#f7f3f1',
+  lunares: 'radial-gradient(circle,#1f1a1c 0 2px,transparent 3px) 0 0/8px 8px,#f7f3f1', estampado: 'linear-gradient(135deg,#f4a7bd,#bcdcf2,#cdb6ea)',
+  surtido: 'linear-gradient(135deg,#f4a7bd,#bcdcf2,#cdb6ea)', multicolor: 'linear-gradient(135deg,#f4a7bd,#f3d36b,#9fd8cb,#cdb6ea)', tie: 'linear-gradient(135deg,#f4a7bd,#cdb6ea,#a9d4ec)',
+  'tie dye': 'linear-gradient(135deg,#f4a7bd,#cdb6ea,#a9d4ec)', transparente: 'repeating-linear-gradient(45deg,#ffffff 0 4px,#eee 4px 8px)',
 };
 const TONO_DESCONOCIDO = '#e9c6d0';
+
+/** Busca el tono de un color escrito a mano: "Verde Lima", "verdes", "rosa chicle fluo"… */
+export function tonoDe(nombre) {
+  const limpio = normalizar(nombre).replace(/\s+/g, ' ');
+  const candidatos = [limpio, limpio.replace(/(es|s)$/, '')];
+  for (const c of candidatos) if (TONOS[c]) return TONOS[c];
+  // Si no está entero, prueba de a pedazos: primero las dos primeras palabras, después cada palabra
+  const palabras = limpio.split(' ');
+  for (let largo = palabras.length - 1; largo >= 1; largo--) {
+    for (let i = 0; i + largo <= palabras.length; i++) {
+      const parte = palabras.slice(i, i + largo).join(' ');
+      if (TONOS[parte]) return TONOS[parte];
+      if (TONOS[parte.replace(/(es|s)$/, '')]) return TONOS[parte.replace(/(es|s)$/, '')];
+    }
+  }
+  return TONO_DESCONOCIDO;
+}
+
+/** La lista de colores que la página reconoce (para la guía). */
+export const COLORES_CONOCIDOS = () => Object.keys(TONOS);
 
 const normalizar = (texto) => String(texto ?? '').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 const esSi = (texto) => ['si', 'sí', 'x', 'true', '1'].includes(normalizar(texto));
@@ -95,7 +139,7 @@ export function productosDesdeCSV(texto) {
 
     const nombresColores = lista(valor('colores'));
     const colores = Object.fromEntries((nombresColores.length ? nombresColores : ['Único'])
-      .map((c) => [c.charAt(0).toUpperCase() + c.slice(1), TONOS[normalizar(c)] ?? TONOS[c.toLowerCase()] ?? TONO_DESCONOCIDO]));
+      .map((c) => [c.charAt(0).toUpperCase() + c.slice(1), tonoDe(c)]));
 
     productos.push({
       id: codigo,

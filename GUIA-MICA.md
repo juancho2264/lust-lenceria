@@ -33,6 +33,19 @@ Cada fila es un producto.
 - **Producto nuevo:** escribís en la fila de abajo de la tabla. **Mientras lo estás cargando, poné `no` en Mostrar**, y cuando esté completo lo pasás a `sí`.
 - **Un producto no aparece:** revisá que tenga nombre, precio (solo números) y talles.
 
+## Colores que reconoce la página
+
+Escribilos como quieras (mayúsculas, tildes o plural no importan). Si escribís uno que no está pero empieza con un color conocido (ej. *"verde pino"*), usa ese color base (*verde*). Si no reconoce ninguno, aparece en **rosa neutro**: avisale a Juan y lo agrega.
+
+- **Básicos:** negro, blanco, blanco hueso, off white, crema, marfil, gris, gris claro, gris oscuro, gris topo, plomo, nude, piel, beige, camel, arena, champagne
+- **Marrones:** marrón, chocolate, café, habano, terracota, ladrillo
+- **Rosas y rojos:** rosa, rosa claro, rosa pastel, rosa bebé, rosa viejo, rosa chicle, rosa fuerte, fucsia, magenta, coral, salmón, durazno, rojo, bordó, vino, borravino, cereza, frambuesa
+- **Violetas:** lila, lavanda, violeta, morado, púrpura, ciruela, uva
+- **Azules:** celeste, celeste bebé, azul claro, azul, azul francia, azul rey, azul marino, jean, petróleo, turquesa, aqua, agua marina
+- **Verdes:** verde, verde claro, verde agua, menta, verde lima, verde manzana, verde oscuro, verde inglés, verde militar, oliva, esmeralda, verde benetton, salvia
+- **Amarillos y naranjas:** amarillo, amarillo pastel, mostaza, dorado, plateado, naranja, naranja flúo
+- **Estampados:** animal print, leopardo, cebra, vichy, rayado, floreado, lunares, estampado, surtido, multicolor, tie dye, transparente
+
 ## Fotos (desde el iPhone)
 
 1. Instalá **Google Drive** y entrá con tu Gmail.
