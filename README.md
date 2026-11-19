@@ -41,4 +41,4 @@ node --test js/planilla.test.js
 
 ---
 
-Hecho por [Juan Cruz Ferrandini](https://juancho2264.github.io/Portafolio/).
+Hecho por [Juan Cruz Ferrandini](https://juancruzferrandini.com.ar).
